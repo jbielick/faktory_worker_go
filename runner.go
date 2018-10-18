@@ -36,6 +36,7 @@ func (mgr *Manager) Register(name string, fn Perform) {
 type Manager struct {
 	Concurrency int
 	Queues      []string
+	Labels      []string
 	Pool
 	Logger Logger
 
@@ -85,15 +86,16 @@ func NewManager() *Manager {
 	return &Manager{
 		Concurrency: 20,
 		Queues:      []string{"default"},
+		Labels:      []string{"golang"},
 		Logger:      NewStdLogger(),
 
 		done:           make(chan interface{}),
 		shutdownWaiter: &sync.WaitGroup{},
 		jobHandlers:    map[string]Handler{},
 		eventHandlers: map[eventType][]func(){
-			Startup:  []func(){},
-			Quiet:    []func(){},
-			Shutdown: []func(){},
+			Startup:  {},
+			Quiet:    {},
+			Shutdown: {},
 		},
 	}
 }

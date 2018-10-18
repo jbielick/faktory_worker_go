@@ -17,6 +17,12 @@ func TestRegistration(t *testing.T) {
 	mgr.Register("somejob", sometask)
 }
 
+func TestLabels(t *testing.T) {
+	t.Parallel()
+	mgr := NewManager()
+	mgr.Labels = []string{"unique"}
+}
+
 func TestContext(t *testing.T) {
 	t.Parallel()
 	job := faktory.NewJob("something", 1, 2)

@@ -28,13 +28,15 @@ func main() {
 		}
 	})
 
+	mgr.Labels = []string{"unique"}
+
 	// register job types and the function to execute them
 	mgr.Register("SomeJob", someFunc)
 	mgr.Register("SomeWorker", someFunc)
 	//mgr.Register("AnotherJob", anotherFunc)
 
 	// use up to N goroutines to execute jobs
-	mgr.Concurrency = 20
+	mgr.Concurrency = 1
 
 	// pull jobs from these queues, in this order of precedence
 	mgr.Queues = []string{"critical", "default", "bulk"}
